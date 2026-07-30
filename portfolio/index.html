@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramya Tangella | Portfolio</title>
+    <!-- Google Fonts: Inter for professional code/body feel and Outfit for headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Block -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- AI Assistant Integration Starts -->
+    <link rel="stylesheet" href="ai-assistant.css">
+    <!-- AI Assistant Integration Ends -->
+</head>
+
+<body>
+
+    <!-- Sticky Navigation Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#about" class="logo">RAMYA TANGELLA</a>
+            <!-- Hamburger menu button -->
+            <button class="hamburger" id="hamburger-menu" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <!-- Navigation Links -->
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about" class="active">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Section 1: About Me (Hero Section) -->
+    <section id="about" class="hero-section section">
+        <div class="container hero-wrapper">
+            <!-- Left Column: Biography, Education, and CTA -->
+            <div class="hero-content reveal">
+                <span class="greeting-badge">Welcome to my portfolio</span>
+                <h1 class="hero-name">Ramya Tangella</h1>
+                <h2 class="hero-title">B.Tech Student in Artificial Intelligence & Machine Learning <span
+                        class="divider">|</span> Full Stack Development Enthusiast</h2>
+
+                <p class="hero-summary">
+                    B.Tech final-year student in Artificial Intelligence and Machine Learning with a strong interest in
+                    Full Stack Development. Proficient in Python, JavaScript, Flask, and database fundamentals.
+                    Experienced in developing web applications and integrating APIs to build scalable and user-friendly
+                    solutions.
+                </p>
+
+                <!-- Detailed Education Box -->
+                <div class="education-card">
+                    <div class="edu-header">
+                        <i class="fas fa-graduation-cap edu-icon"></i>
+                        <span class="edu-title">Education Details</span>
+                    </div>
+                    <div class="edu-body">
+                        <h4 class="degree-name">B.Tech in Artificial Intelligence & Machine Learning (AI & ML)</h4>
+                        <p class="college-name">Kakinada Institute Of Engineering And Technology For Women</p>
+                        <div class="edu-details-meta">
+                            <span class="timeline"><i class="far fa-calendar-alt"></i> 2023–2027</span>
+                            <span class="gpa-badge"><i class="fas fa-star"></i> CGPA: <strong>8.21</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="#projects" class="btn btn-primary scroll-link">View Projects <i
+                            class="fas fa-arrow-right"></i></a>
+                    <a href="#contact" class="btn btn-secondary scroll-link">Contact Me <i
+                            class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+
+            <!-- Right Column: Perfect Square Photo Box -->
+            <div class="hero-image-wrapper reveal">
+                <div class="photo-box">
+                    <img src="professional.png" alt="Ramya Tangella">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Technical Skills -->
+    <section id="skills" class="skills-section section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Technical Skills</h2>
+                <p class="section-description">My core technical profile is categorized into specialized toolkits and
+                    disciplines.</p>
+            </div>
+
+            <div class="skills-grid">
+                <!-- Card 1: Programming Languages -->
+                <div class="skill-card reveal">
+                    <div class="skill-card-inner">
+                        <div class="skill-icon-header">
+                            <i class="fas fa-code"></i>
+                            <h3>Programming Languages</h3>
+                        </div>
+                        <div class="tags-container">
+                            <span class="tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Frontend Development -->
+                <div class="skill-card reveal">
+                    <div class="skill-card-inner">
+                        <div class="skill-icon-header">
+                            <i class="fas fa-laptop-code"></i>
+                            <h3>Frontend Development</h3>
+                        </div>
+                        <div class="tags-container">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Machine Learning -->
+                <div class="skill-card reveal">
+                    <div class="skill-card-inner">
+                        <div class="skill-icon-header">
+                            <i class="fas fa-brain"></i>
+                            <h3>Machine Learning</h3>
+                        </div>
+                        <div class="tags-container">
+                            <span class="tag">Fundamentals Of Machine Learning</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Tools & Platforms -->
+                <div class="skill-card reveal">
+                    <div class="skill-card-inner">
+                        <div class="skill-icon-header">
+                            <i class="fas fa-tools"></i>
+                            <h3>Tools & Platforms</h3>
+                        </div>
+                        <div class="tags-container">
+                            <span class="tag">GitHub</span>
+                            <span class="tag">VS Code</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Soft Skills -->
+                <div class="skill-card reveal">
+                    <div class="skill-card-inner">
+                        <div class="skill-icon-header">
+                            <i class="fas fa-users-cog"></i>
+                            <h3>Soft Skills</h3>
+                        </div>
+                        <div class="tags-container">
+                            <span class="tag">Team Management</span>
+                            <span class="tag">Problem Solving</span>
+                            <span class="tag">Communication</span>
+                            <span class="tag">Time Management</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Key Projects -->
+    <section id="projects" class="projects-section section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Key Projects</h2>
+                <p class="section-description">Deep-dive into some of the primary projects I have developed as a full
+                    stack and AI student.</p>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Project Card 1 -->
+                <article class="project-card reveal">
+                    <div class="project-glow-border"></div>
+                    <div class="project-card-content">
+                        <div class="project-header">
+                            <span class="project-icon"><i class="fas fa-solid fa-seedling"></i></span>
+                            <div class="project-title-meta">
+                                <h3 class="project-name">AI Diet Plan Recommendation System</h3>
+                                <p class="project-subtitle">Personalized Health & Nutrition Application</p>
+                            </div>
+                        </div>
+
+                        <div class="project-tech-stack">
+                            <span class="tech-badge">HTML</span>
+                            <span class="tech-badge">CSS</span>
+                            <span class="tech-badge">Flask</span>
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">LLM API</span>
+                        </div>
+
+                        <p class="project-desc">
+                            Developed a web application that generates personalized diet plans using details like age,
+                            weight, height, and fitness goals. Integrated an AI/LLM API to provide customized meal
+                            recommendations and connected HTML/CSS/JS with a Flask backend.
+                        </p>
+
+                        <div class="project-footer">
+                            <a href="https://github.com/ramyathangella434" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-github">
+                                <i class="fab fa-github"></i> View GitHub
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project Card 2 -->
+                <article class="project-card reveal">
+                    <div class="project-glow-border"></div>
+                    <div class="project-card-content">
+                        <div class="project-header">
+                            <span class="project-icon"><i class="fas fa-heartbeat"></i></span>
+                            <div class="project-title-meta">
+                                <h3 class="project-name">AI Fitness Tracking System</h3>
+                                <p class="project-subtitle">Full-Stack Workout & Nutrition Analytics Platform</p>
+                            </div>
+                        </div>
+
+                        <div class="project-tech-stack">
+                            <span class="tech-badge">HTML</span>
+                            <span class="tech-badge">CSS</span>
+                            <span class="tech-badge">Flask</span>
+                            <span class="tech-badge">Python</span>
+                        </div>
+
+                        <p class="project-desc">
+                            Developed a fitness tracking web application that records daily workouts, calories burned,
+                            and active minutes. Implemented personalized fitness recommendations based on user health
+                            data and integrated frontend with Flask backend.
+                        </p>
+
+                        <div class="project-footer">
+                            <a href="https://github.com/ramyathangella434" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-github">
+                                <i class="fab fa-github"></i> View GitHub
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Certifications -->
+    <section id="certifications" class="certifications-section section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Certifications</h2>
+                <p class="section-description">A curated selection of technical programs and courses I have completed.
+                </p>
+            </div>
+
+            <div class="certifications-grid">
+                <!-- Cert 1 -->
+                <div class="cert-card reveal">
+                    <div class="cert-image-container">
+                        <img src="python infosys.jpeg" alt="Python For Beginners Certificate">
+                        <div class="cert-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="cert-content">
+                        <div class="cert-header-meta">
+                            <div class="cert-icon-box">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <div class="cert-details">
+                                <h4 class="cert-title">Python For Beginners</h4>
+                                <p class="cert-issuer">Infosys Springboard</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 2 -->
+                <div class="cert-card reveal">
+                    <div class="cert-image-container">
+                        <img src="ramya fmml.jpeg" alt="Foundations of Modern Machine Learning Certificate">
+                        <div class="cert-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="cert-content">
+                        <div class="cert-header-meta">
+                            <div class="cert-icon-box">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="cert-details">
+                                <h4 class="cert-title">Foundations of Modern ML</h4>
+                                <p class="cert-issuer">IIIT Hyderabad (iHub Data)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 3 -->
+                <div class="cert-card reveal">
+                    <div class="cert-image-container">
+                        <img src="python eduskills.jpeg" alt="Python FullStack Certification Certificate">
+                        <div class="cert-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="cert-content">
+                        <div class="cert-header-meta">
+                            <div class="cert-icon-box">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="cert-details">
+                                <h4 class="cert-title">Python FullStack Certification</h4>
+                                <p class="cert-issuer">EduSkills Academy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 4 -->
+                <div class="cert-card reveal">
+                    <div class="cert-image-container">
+                        <img src="ramya aicw(microsoft).jpeg" alt="AI Careers for Women Certificate">
+                        <div class="cert-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="cert-content">
+                        <div class="cert-header-meta">
+                            <div class="cert-icon-box">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="cert-details">
+                                <h4 class="cert-title">AI Careers for Women</h4>
+                                <p class="cert-issuer">Microsoft, SAP &amp; Edunet Foundation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Achievements & Technical Exposure -->
+    <section id="achievements" class="achievements-section section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Achievements & Technical Exposure</h2>
+                <p class="section-description">Highlights of technical skill application, control systems, and
+                    collaborative development.</p>
+            </div>
+
+            <div class="achievements-grid">
+                <!-- Achievement Box 1 -->
+                <div class="achievement-card reveal">
+                    <div class="ach-icon-wrapper">
+                        <i class="fab fa-git-alt"></i>
+                    </div>
+                    <h3 class="ach-title">GitHub Version Control</h3>
+                    <p class="ach-desc">
+                        Actively maintain public repositories containing clear README documentations, modular codebases,
+                        and clean structural standards.
+                    </p>
+                </div>
+
+                <!-- Achievement Box 2 -->
+                <div class="achievement-card reveal">
+                    <div class="ach-icon-wrapper">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="ach-title">Problem Solving</h3>
+                    <p class="ach-desc">
+                        Actively practicing core algorithm design, data structures, and backend integration workflows.
+                    </p>
+                </div>
+
+                <!-- Achievement Box 3 -->
+                <div class="achievement-card reveal">
+                    <div class="ach-icon-wrapper">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="ach-title">Hackathons & Tech Events</h3>
+                    <p class="ach-desc">
+                        Collaborated in technical ideation bootcamps to prototype cross-functional software solutions
+                        under competitive timelines.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Contact Me -->
+    <section id="contact" class="contact-section section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contact Me</h2>
+                <p class="section-description">Have a question or interesting project? Drop me a line!</p>
+            </div>
+
+            <div class="contact-wrapper">
+                <!-- Left Column: Direct Contact Info -->
+                <div class="contact-info-col reveal">
+                    <h3 class="contact-subtitle">Get In Touch</h3>
+                    <p class="contact-info-desc">Feel free to reach out via email, call, or explore my profiles across
+                        developers' channels.</p>
+
+                    <div class="contact-info-items">
+                        <div class="info-card">
+                            <i class="fas fa-envelope info-icon"></i>
+                            <div class="info-details">
+                                <span class="info-label">Email Me</span>
+                                <a href="mailto:ramyathangella434@gmail.com"
+                                    class="info-value">ramyathangella434@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <i class="fas fa-phone-alt info-icon"></i>
+                            <div class="info-details">
+                                <span class="info-label">Call Me</span>
+                                <a href="tel:+916305244315" class="info-value">+91 6305244315</a>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <i class="fas fa-map-marker-alt info-icon"></i>
+                            <div class="info-details">
+                                <span class="info-label">Location</span>
+                                <span class="info-value">Kakinada, India</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Styled Action Profile Icons -->
+                    <div class="social-links-wrapper">
+                        <h4 class="social-links-title">My Professional Links</h4>
+                        <div class="social-buttons">
+                            <a href="https://www.linkedin.com/in/ramyasritangella" target="_blank" rel="noopener noreferrer"
+                                class="social-btn linkedin-btn" aria-label="LinkedIn Profile">
+                                <i class="fab fa-linkedin-in"></i> LinkedIn
+                            </a>
+                            <a href="https://github.com/Sairamya07" target="_blank" rel="noopener noreferrer"
+                                class="social-btn github-profile-btn" aria-label="GitHub Profile">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Contact Form -->
+                <div class="contact-form-col reveal">
+                    <form id="portfolio-contact-form" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="form-name">Name</label>
+                                <div class="input-wrapper">
+                                    <i class="far fa-user input-icon"></i>
+                                    <input type="text" id="form-name" placeholder="John Doe" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-email">Email</label>
+                                <div class="input-wrapper">
+                                    <i class="far fa-envelope input-icon"></i>
+                                    <input type="email" id="form-email" placeholder="john@example.com" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-subject">Subject</label>
+                            <div class="input-wrapper">
+                                <i class="far fa-sticky-note input-icon"></i>
+                                <input type="text" id="form-subject" placeholder="Project Inquiries" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-message">Message</label>
+                            <textarea id="form-message" rows="5" placeholder="I would like to discuss..."
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-submit">
+                            <span>Send Message</span> <i class="far fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Area -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <span class="footer-logo">Ramya Tangella</span>
+            <p class="copyright">&copy; 2026 Ramya Tangella. All Rights Reserved. Crafted with care</p>
+        </div>
+    </footer>
+
+    <!-- Dedicated Script -->
+    <script src="script.js"></script>
+    <!-- AI Assistant Integration Starts -->
+    <script src="ai-assistant.js" defer></script>
+    <!-- AI Assistant Integration Ends -->
+</body>
+
+</html>
