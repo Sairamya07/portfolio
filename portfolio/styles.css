@@ -1115,6 +1115,109 @@ img {
 }
 
 
+/* --- Section: Resume --- */
+.resume-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.resume-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-slate);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.resume-card-glow-border {
+    position: absolute;
+    inset: 0;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    pointer-events: none;
+    transition: var(--transition);
+    z-index: 2;
+}
+
+.resume-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.resume-card:hover .resume-card-glow-border {
+    border-color: var(--accent);
+    box-shadow: 0 0 25px var(--accent-glow);
+}
+
+.resume-card-content {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+}
+
+.resume-card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 0.25rem;
+}
+
+.resume-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    color: var(--accent);
+    font-size: 2.0rem;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.resume-description {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.resume-actions {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.resume-fallback-msg {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed var(--border-slate);
+    border-radius: 8px;
+    margin-top: 0.5rem;
+}
+
+.resume-fallback-msg i {
+    color: var(--accent);
+}
+
+
 /* ==========================================================================
    Responsive Media Queries (RWD Grid System)
    ========================================================================== */
@@ -1243,6 +1346,17 @@ img {
     }
 
     .social-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .resume-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .resume-actions .btn {
         width: 100%;
         justify-content: center;
     }

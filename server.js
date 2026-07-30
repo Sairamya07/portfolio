@@ -38,24 +38,26 @@ app.post('/api/contact', async (req, res) => {
     const smtpSecure = process.env.SMTP_SECURE === 'true';
     const emailUser = process.env.EMAIL_USER;
     const emailPass = process.env.EMAIL_PASS;
+    const senderEmail = process.env.SENDER_EMAIL || emailUser;
 
-    console.log(`[SMTP Config Check]: Host=${smtpHost}, Port=${smtpPort}, Secure=${smtpSecure}, User=${emailUser ? emailUser : 'Not Set'}`);
+    console.log(`[SMTP Config Check]: Host=${smtpHost}, Port=${smtpPort}, Secure=${smtpSecure}, User=${emailUser ? emailUser : 'Not Set'}, Sender=${senderEmail}`);
 
     // Configuration assertions
     if (!emailUser || emailUser === 'your_email@gmail.com') {
         console.error("[SMTP Error]: EMAIL_USER is not set or contains the default placeholder value.");
         return res.status(500).json({
-            error: "EMAIL_USER environment variable is unset or contains default placeholder value."
+            error: "EMAIL_USER environment variable is unset or contains default placeholder value. Please inspect your .env configuration."
         });
     }
     if (!emailPass || emailPass === 'your_gmail_app_password') {
         console.error("[SMTP Error]: EMAIL_PASS is not set or contains the default placeholder value.");
         return res.status(500).json({
-            error: "EMAIL_PASS environment variable is unset or contains default placeholder value."
+            error: "EMAIL_PASS environment variable is unset or contains default placeholder value. Please inspect your .env configuration."
         });
     }
 
-    const transporter = nodemailer.createTransport({
+    // Configure Transport Options
+    const transportOptions = {
         host: smtpHost,
         port: smtpPort,
         secure: smtpSecure,
@@ -63,7 +65,14 @@ app.post('/api/contact', async (req, res) => {
             user: emailUser,
             pass: emailPass
         }
-    });
+    };
+
+    // Auto-setup service if Gmail SMTP is detected (standardizes port/TLS requirements)
+    if (smtpHost.includes('gmail.com')) {
+        transportOptions.service = 'gmail';
+    }
+
+    const transporter = nodemailer.createTransport(transportOptions);
 
     // Verify SMTP connection before attempting to send mail
     try {
@@ -72,8 +81,19 @@ app.post('/api/contact', async (req, res) => {
         console.log("[SMTP Status]: Verification success. Mail server is responsive and credentials accepted.");
     } catch (verifyError) {
         console.error("[SMTP Error]: Connection verification failed: ", verifyError);
+
+        let customMessage = `SMTP Connection failed: ${verifyError.message}`;
+        if (verifyError.message.includes('535') || verifyError.message.includes('Username and Password not accepted')) {
+            customMessage = `SMTP Authentication failed (Invalid Credentials).
+1. If using Gmail, make sure to generate and use a 16-character App Password (verify 2-Step Verification is enabled in your Google account).
+2. Ensure EMAIL_USER matches the Google Account that generated the App Password.
+3. If using Mailtrap, Resend, or SendGrid, verify the SMTP credentials, host, and port are set correctly in your .env file.`;
+        } else if (verifyError.code === 'ENOTFOUND' || verifyError.code === 'ETIMEDOUT') {
+            customMessage = `SMTP connection timed out or host not found. Please review your SMTP_HOST (${smtpHost}) and SMTP_PORT (${smtpPort}) settings in your .env file and check your network environment.`;
+        }
+
         return res.status(500).json({
-            error: `Gmail/SMTP Authentication failed. Please ensure setup matches instructions. Details: ${verifyError.message}`
+            error: customMessage
         });
     }
 
@@ -85,8 +105,8 @@ app.post('/api/contact', async (req, res) => {
 
     // Setup mail schema
     const mailOptions = {
-        from: `"${cleanName}" <${process.env.EMAIL_USER}>`,
-        to: process.env.RECEIVER_EMAIL,
+        from: `"${cleanName}" <${senderEmail}>`,
+        to: process.env.RECEIVER_EMAIL || emailUser,
         replyTo: cleanEmail,
         subject: `[Contact Form] ${cleanSubject}`,
         text: `You have received a new contact message from your portfolio site.

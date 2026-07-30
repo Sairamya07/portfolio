@@ -201,4 +201,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
         });
     }
+
+    // 6. Resume PDF availability check
+    const resumeActions = document.getElementById('resume-actions');
+    const resumeFallback = document.getElementById('resume-fallback-msg');
+
+    if (resumeActions && resumeFallback) {
+        const resumeUrl = '/assets/resume/Ramya_Resume.pdf';
+
+        fetch(resumeUrl, { method: 'HEAD' })
+            .then(response => {
+                const contentType = response.headers.get('content-type') || '';
+                if (response.ok && !contentType.includes('text/html')) {
+                    resumeActions.style.display = 'flex';
+                    resumeFallback.style.display = 'none';
+                } else {
+                    resumeActions.style.display = 'none';
+                    resumeFallback.style.display = 'flex';
+                }
+            })
+            .catch(error => {
+                console.error("Resume file check failed: ", error);
+                resumeActions.style.display = 'none';
+                resumeFallback.style.display = 'flex';
+            });
+    }
 });
