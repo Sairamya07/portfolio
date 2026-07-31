@@ -40,62 +40,83 @@ const transportOptions = {
 // Create a single reusable transporter instance
 const transporter = nodemailer.createTransport(transportOptions);
 
-// 8. Improve error handling by distinguishing error categories
-function classifySmtpError(err, host) {
+// 8. Improve error handling by distinguishing error categories safely without throwing
+function classifySmtpError(error, host) {
     const errorInfo = {
         category: "Unknown Error",
-        message: err.message || "",
-        code: err.code || "",
-        command: err.command || "",
-        response: err.response || "",
-        responseCode: err.responseCode || ""
+        message: "",
+        code: "",
+        command: "",
+        response: "",
+        responseCode: ""
     };
 
     const hostName = host || '';
-    const errMessage = errorInfo.message;
-    const errCode = errorInfo.code;
 
-    if (
-        errCode === 'EAUTH' ||
-        errInfo.responseCode === 535 ||
-        errMessage.includes('535') ||
-        errMessage.toLowerCase().includes('username and password not accepted') ||
-        errMessage.toLowerCase().includes('authentication')
-    ) {
-        errorInfo.category = "Authentication failed";
-        errorInfo.diagnostic = "SMTP authentication failed. Verify EMAIL_USER and EMAIL_PASS are correct. If using Gmail, you must use a 16-character App Password, and 2-Step Verification must be enabled.";
-    } else if (errCode === 'ENOTFOUND' || errMessage.includes('getaddrinfo ENOTFOUND')) {
-        errorInfo.category = "DNS lookup failed";
-        errorInfo.diagnostic = `DNS lookup failed for SMTP host "${hostName}". The server could not resolve the mail server address. Please verify SMTP_HOST.`;
-    } else if (
-        errCode === 'ETIMEDOUT' ||
-        errMessage.toLowerCase().includes('timeout') ||
-        errMessage.toLowerCase().includes('timed out')
-    ) {
-        errorInfo.category = "Connection timeout";
-        errorInfo.diagnostic = `Connection to "${hostName}" timed out. This often occurs when outbound SMTP traffic on ports like 25, 465, or 587 is blocked by your hosting environment's firewall (e.g. Render blocks port 25).`;
-    } else if (
-        errCode === 'ECONNREFUSED' ||
-        errMessage.toLowerCase().includes('connection refused')
-    ) {
-        errorInfo.category = "Gmail / Provider rejected connection";
-        errorInfo.diagnostic = `The connection to "${hostName}" was refused or rejected by the target server. This might occur if Gmail or your provider is blocking requests from this IP pool due to rate-limiting/spam protection.`;
-    } else if (
-        errCode === 'ERR_SSL_WRONG_VERSION_NUMBER' ||
-        errMessage.toLowerCase().includes('ssl') ||
-        errMessage.toLowerCase().includes('tls') ||
-        errMessage.toLowerCase().includes('starttls') ||
-        errMessage.toLowerCase().includes('secure')
-    ) {
-        errorInfo.category = "TLS errors";
-        errorInfo.diagnostic = `TLS/SSL handshake or protocol negotiation failed. Make sure SMTP_SECURE matches the chosen port (typically, set SMTP_SECURE=true for port 465 (SSL/TLS) and SMTP_SECURE=false for port 587 (STARTTLS)).`;
-    } else if (hostName.includes('gmail.com') && (errMessage.toLowerCase().includes('gmail') || errMessage.toLowerCase().includes('smtp.gmail.com'))) {
-        errorInfo.category = "Gmail rejected connection";
-        errorInfo.diagnostic = "Gmail SMTP rejected the connection. If this persists, please switch to a reliable transactional provider like Brevo or Resend.";
+    // 6. Ensure classifySmtpError() never throws an exception
+    try {
+        // 7. Add null checks before reading: error.code, error.responseCode, error.message
+        const errorCode = (error && error.code) ? String(error.code) : "";
+        const errorMessage = (error && error.message) ? String(error.message) : "";
+        const errorResponseCode = (error && error.responseCode) ? Number(error.responseCode) : "";
+        const errorCommand = (error && error.command) ? String(error.command) : "";
+        const errorResponse = (error && error.response) ? String(error.response) : "";
+
+        // Populate errorInfo safely
+        errorInfo.code = errorCode;
+        errorInfo.message = errorMessage;
+        errorInfo.responseCode = errorResponseCode;
+        errorInfo.command = errorCommand;
+        errorInfo.response = errorResponse;
+
+        // 3. Ensure the function uses the correct parameter consistently.
+        // 4. Do not reference undefined variables like errInfo.
+        // 5. Replace every undefined reference with the actual function argument (checked variables from error).
+        if (
+            errorCode === 'EAUTH' ||
+            errorResponseCode === 535 ||
+            errorMessage.includes('535') ||
+            errorMessage.toLowerCase().includes('username and password not accepted') ||
+            errorMessage.toLowerCase().includes('authentication')
+        ) {
+            errorInfo.category = "Authentication failed";
+            errorInfo.diagnostic = "SMTP authentication failed. Verify EMAIL_USER and EMAIL_PASS are correct. If using Gmail, you must use a 16-character App Password, and 2-Step Verification must be enabled.";
+        } else if (errorCode === 'ENOTFOUND' || errorMessage.includes('getaddrinfo ENOTFOUND')) {
+            errorInfo.category = "DNS lookup failed";
+            errorInfo.diagnostic = `DNS lookup failed for SMTP host "${hostName}". The server could not resolve the mail server address. Please verify SMTP_HOST.`;
+        } else if (
+            errorCode === 'ETIMEDOUT' ||
+            errorMessage.toLowerCase().includes('timeout') ||
+            errorMessage.toLowerCase().includes('timed out')
+        ) {
+            errorInfo.category = "Connection timeout";
+            errorInfo.diagnostic = `Connection to "${hostName}" timed out. This often occurs when outbound SMTP traffic on ports like 25, 465, or 587 is blocked by your hosting environment's firewall (e.g. Render blocks port 25).`;
+        } else if (
+            errorCode === 'ECONNREFUSED' ||
+            errorMessage.toLowerCase().includes('connection refused')
+        ) {
+            errorInfo.category = "Gmail / Provider rejected connection";
+            errorInfo.diagnostic = `The connection to "${hostName}" was refused or rejected by the target server. This might occur if Gmail or your provider is blocking requests from this IP pool due to rate-limiting/spam protection.`;
+        } else if (
+            errorCode === 'ERR_SSL_WRONG_VERSION_NUMBER' ||
+            errorMessage.toLowerCase().includes('ssl') ||
+            errorMessage.toLowerCase().includes('tls') ||
+            errorMessage.toLowerCase().includes('starttls') ||
+            errorMessage.toLowerCase().includes('secure')
+        ) {
+            errorInfo.category = "TLS errors";
+            errorInfo.diagnostic = `TLS/SSL handshake or protocol negotiation failed. Make sure SMTP_SECURE matches the chosen port (typically, set SMTP_SECURE=true for port 465 (SSL/TLS) and SMTP_SECURE=false for port 587 (STARTTLS)).`;
+        } else if (hostName.includes('gmail.com') && (errorMessage.toLowerCase().includes('gmail') || errorMessage.toLowerCase().includes('smtp.gmail.com'))) {
+            errorInfo.category = "Gmail rejected connection";
+            errorInfo.diagnostic = "Gmail SMTP rejected the connection. If this persists, please switch to a reliable transactional provider like Brevo or Resend.";
+        }
+    } catch (e) {
+        console.error("Error during SMTP error classification:", e);
     }
 
     return errorInfo;
 }
+
 
 // 7. Add transporter.verify() during server startup and print detailed diagnostics
 // 9. If SMTP connection fails, print the complete stack trace to the console
