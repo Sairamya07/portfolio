@@ -226,4 +226,58 @@ document.addEventListener('DOMContentLoaded', () => {
                 resumeFallback.style.display = 'flex';
             });
     }
+
+    // 7. Certifications Lightbox Modal
+    const initCertLightbox = () => {
+        let lightbox = document.getElementById('cert-lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'cert-lightbox';
+            lightbox.className = 'lightbox-modal';
+            lightbox.innerHTML = `
+                <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+                <div class="lightbox-content">
+                    <img id="lightbox-img" src="" alt="Certificate View">
+                </div>
+            `;
+            document.body.appendChild(lightbox);
+
+            const closeBtn = lightbox.querySelector('.lightbox-close');
+            const closeLightbox = () => {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            };
+
+            closeBtn.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+        }
+
+        const certLinks = document.querySelectorAll('.cert-link');
+        certLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const imgUrl = link.getAttribute('href');
+                const imgAlt = link.querySelector('img') ? link.querySelector('img').getAttribute('alt') : 'Certificate';
+
+                const lightboxImg = lightbox.querySelector('#lightbox-img');
+                lightboxImg.src = imgUrl;
+                lightboxImg.alt = imgAlt;
+
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+    };
+
+    initCertLightbox();
 });
